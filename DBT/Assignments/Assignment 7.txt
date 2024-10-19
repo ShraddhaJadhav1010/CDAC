@@ -1,0 +1,80 @@
+Assignment –7
+Summarizing Data with Aggregate Functions.
+1) Write a query that counts all orders for October 3.
+
+mysql> select count(Onum)from Orders
+    -> where Odate='1990-10-03';
++-------------+
+| count(Onum) |
++-------------+
+|           5 |
++-------------+
+1 row in set (0.05 sec)
+
+
+
+
+2) Write a query that counts the number of different non-NULL city values in the
+Customers table.
+mysql> select count(city)from customers
+    -> where city is not null;
++-------------+
+| count(city) |
++-------------+
+|           7 |
++-------------+
+
+3) Write a query that selects each customer’s smallest order.
+
+mysql> select cnum,min(amt)from orders
+    -> group by cnum;
++------+----------+
+| cnum | min(amt) |
++------+----------+
+| 2008 |    18.69 |
+| 2001 |   767.19 |
+| 2007 |  1900.10 |
+| 2003 |  5160.45 |
+| 2002 |  1713.23 |
+| 2004 |    75.75 |
+| 2006 |  4723.00 |
++------+----------+
+
+4) Write a query that selects the first customer, in alphabetical order, whose name
+begins with G.
+
+mysql> select  * from customers  where Cname LIKE 'G%' ORDER BY Cname;
++------+----------+--------+--------+------+
+| Cnum | Cname    | City   | Rating | Snum |
++------+----------+--------+--------+------+
+| 2002 | Giovanni | Rome   |    200 | 1003 |
+| 2004 | Grass    | Berlin |    300 | 1002 |
++------+----------+--------+--------+------+
+5) Write a query that selects the highest rating in each city.
+
+mysql> select city, max(rating) from customers
+    -> group by city;
++----------+-------------+
+| city     | max(rating) |
++----------+-------------+
+| London   |         100 |
+| Rome     |         200 |
+| San Jose |         300 |
+| Berlin   |         300 |
++----------+-------------+
+
+6) Write a query that counts the number of salespeople registering orders for each
+day. (If a salesperson has more than one order on a given day, he or she should be
+counted only once.).0
+
+mysql> select snum,count(distinct Odate) from orders
+    -> group by Snum;
++------+-----------------------+
+| snum | count(distinct Odate) |
++------+-----------------------+
+| 1001 |                     3 |
+| 1002 |                     3 |
+| 1003 |                     1 |
+| 1004 |                     1 |
+| 1007 |                     1 |
++------+-----------------------+
