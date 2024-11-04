@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+    <script>
+        const fetchPokemon = ()=>{
+            return new Promise((resolve, reject) =>{
+                setTimeout(() => {
+                    //resolve({data:{name:"Pokemon", power:20}});
+                    reject(new Error("Error!"));
+                }, 2000);
+            });
+        };
+
+        console.log("Program starting ...");
+        
+        const usePokemon = async()=>{
+            try{
+            const data = fetchPokemon();
+            console.log(data);
+            console.log("Done fetching...");
+        }
+        catch(error){
+            console.error(error);
+        }
+        console.log("Error ");
+        };
+
+        usePokemon();
+        console.log("Program completed!");
+    </script>
+</body>
+</html>
