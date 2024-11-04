@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment_4</title>
+  </head>
+  <body>
+    <!-- ques_1 -->
+    <script>
+      function toUpperCase(str) {
+        return str.toUpperCase();
+      }
+      function processData(inputString, callback) {
+        const result = callback(inputString);
+        console.log(result);
+      }
+      processData("hello world", toUpperCase); 
+    </script>
+
+    <!-- ques2 -->
+    <script>
+      function forEachElement(arr, callback) {
+        arr.forEach((element, index) => {
+          callback(element, index);
+        });
+      }
+
+      forEachElement([1, 2, 3, 4], (element, index) => {
+        console.log(`Index ${index}: ${element * 2}`);
+      });
+    </script>
+
+    <!-- ques_3 -->
+    <script>
+      function fetchData(url, callback) {
+        setTimeout(() => {
+          const response = `Response from ${url}`;
+          callback(response);
+        }, 2000);
+      }
+
+      fetchData("http://www.google.com", (response) => {
+        console.log(response);
+      });
+    </script>
+
+    <!-- ques_4 -->
+    <script>
+      function fetchData(url, callback) {
+        setTimeout(() => {
+          const success = Math.random() > 0.2;
+          if (success) {
+            const response = `Response from ${url}`;
+            callback(null, response);
+          } else {
+            callback("Error occurred while fetching data", null);
+          }
+        }, 3000);
+      }
+
+      fetchData("http://www.google.com", (error, response) => {
+        if (error) {
+          console.error(error);
+        } else {
+          console.log(response);
+        }
+      });
+    </script>
+
+    <!-- ques_5 -->
+    <script>
+      function processData(data, callback) {
+        const processedData = data.toUpperCase();
+        callback(processedData);
+      }
+
+      fetchData("http://www.amazon.in", (error, response) => {
+        if (error) {
+          console.error(error);
+        } else {
+          processData(response, (processed) => {
+            console.log(processed);
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
